@@ -1,0 +1,24 @@
+mysql> use marks;
+Database changed
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
+| assessment | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> select * from marks;
++-------+-------------+------------+-------+------------+
+| regno | name        | coursename | marks | assessment |
++-------+-------------+------------+-------+------------+
+|   206 | hemanth     | DBMS       |    96 |         88 |
+|   205 | rajashekhar | DBMS       |    92 |         84 |
+|   215 | shreeya     | DBMS       |    93 |         86 |
+|   296 | shaheed     | DBMS       |    89 |         91 |
++-------+-------------+------------+-------+------------+
+4 rows in set (0.00 sec)

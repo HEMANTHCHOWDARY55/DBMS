@@ -1,0 +1,85 @@
+EXPERIMENT 6:
+
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| idno     | int(3)      | NO   | PRI | 0       |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from faculty;
++------+-------------+--------+------------+-----------+
+| idno | name        | gender | dob        | mobileno  |
++------+-------------+--------+------------+-----------+
+|  205 | rajashekhar | M      | 2004-06-04 | 738603133 |
+|  206 | shreeya     | F      | 2004-01-18 | 891995202 |
+|  215 | hemanth     | M      | 2005-06-10 | 830938992 |
+|  296 | shaheed     | M      | 2004-03-13 | 830933280 |
+|  297 | bharath     | M      | 2004-05-19 | 809889878 |
++------+-------------+--------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select name, gender, dob from faculty order by idno;
++-------------+--------+------------+
+| name        | gender | dob        |
++-------------+--------+------------+
+| rajashekhar | M      | 2004-06-04 |
+| shreeya     | F      | 2004-01-18 |
+| hemanth     | M      | 2005-06-10 |
+| shaheed     | M      | 2004-03-13 |
+| bharath     | M      | 2004-05-19 |
++-------------+--------+------------+
+5 rows in set (0.02 sec)
+
+mysql> use marks;
+Database changed
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from marks;
++-------+-------------+------------+-------+
+| regno | name        | coursename | marks |
++-------+-------------+------------+-------+
+|   206 | hemanth     | DBMS       |    96 |
+|   205 | rajashekhar | DBMS       |    92 |
+|   215 | shreeya     | DBMS       |    93 |
+|   296 | shaheed     | DBMS       |    89 |
++-------+-------------+------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks order by marks desc;
++-------+-------------+------------+-------+
+| regno | name        | coursename | marks |
++-------+-------------+------------+-------+
+|   206 | hemanth     | DBMS       |    96 |
+|   215 | shreeya     | DBMS       |    93 |
+|   205 | rajashekhar | DBMS       |    92 |
+|   296 | shaheed     | DBMS       |    89 |
++-------+-------------+------------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from marks order by regno desc;
++-------+-------------+------------+-------+
+| regno | name        | coursename | marks |
++-------+-------------+------------+-------+
+|   296 | shaheed     | DBMS       |    89 |
+|   215 | shreeya     | DBMS       |    93 |
+|   206 | hemanth     | DBMS       |    96 |
+|   205 | rajashekhar | DBMS       |    92 |
++-------+-------------+------------+-------+
+4 rows in set (0.00 sec)

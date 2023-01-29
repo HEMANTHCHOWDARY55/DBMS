@@ -1,0 +1,183 @@
+EXPERIMENT 5:
+1.
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| idno     | int(3)      | NO   | PRI | 0       |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| email    | varchar(18) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE faculty;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DROP email;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'email' at line 1
+mysql> ALTER TABLE faculty;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE faculty
+    -> DROP COLUMN email;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| idno     | int(3)      | NO   | PRI | 0       |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into faculty values ('206','shreeya','F','2004-01-18','891995202');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into faculty values ('206','shreeya','','2005-06-10','830938992');
+ERROR 1062 (23000): Duplicate entry '206' for key 'PRIMARY'
+mysql> insert into faculty values ('215','hemanth','M','2005-06-10','830938992');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into faculty values ('296','shaheed','M','2004-03-13','830933280');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values ('297','bharath','M','2004-05-19','809889878');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values ('205','rajashekhar','M','2004-06-04','738603133');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from faculty;
++------+-------------+--------+------------+-----------+
+| idno | name        | gender | dob        | mobileno  |
++------+-------------+--------+------------+-----------+
+|  205 | rajashekhar | M      | 2004-06-04 | 738603133 |
+|  206 | shreeya     | F      | 2004-01-18 | 891995202 |
+|  215 | hemanth     | M      | 2005-06-10 | 830938992 |
+|  296 | shaheed     | M      | 2004-03-13 | 830933280 |
+|  297 | bharath     | M      | 2004-05-19 | 809889878 |
++------+-------------+--------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select from student where BETWEEN 205 and 296;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student where BETWEEN 205 and 296' at line 1
+mysql> select from student where BETWEEN 205 AND 296;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from faculty where idno BETWEEN 205 AND 296' at line 1
+mysql> select * from faculty where idno BETWEEN 205 AND 296;
++------+-------------+--------+------------+-----------+
+| idno | name        | gender | dob        | mobileno  |
++------+-------------+--------+------------+-----------+
+|  205 | rajashekhar | M      | 2004-06-04 | 738603133 |
+|  206 | shreeya     | F      | 2004-01-18 | 891995202 |
+|  215 | hemanth     | M      | 2005-06-10 | 830938992 |
+|  296 | shaheed     | M      | 2004-03-13 | 830933280 |
++------+-------------+--------+------------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> select * from faculty where mobileno='830938992' and idno='215';
++------+---------+--------+------------+-----------+
+| idno | name    | gender | dob        | mobileno  |
++------+---------+--------+------------+-----------+
+|  215 | hemanth | M      | 2005-06-10 | 830938992 |
++------+---------+--------+------------+-----------+
+1 row in set (0.00 sec)
+
+3.
+mysql> use marks;
+Database changed
+mysql> desc marks;
+ERROR 1146 (42S02): Table 'marks.marks' doesn't exist
+mysql> create table marks(regno int(3),name varchar(15),coursename varchar(30),marks int(3));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into marks values ('206','hemanth','DBMS','96');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values ('205','rajashekhar','DBMS','92');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values ('215','shreeya','DBMS','93');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values ('296','shaheed','DBMS','89');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from marks;
++-------+-------------+------------+-------+
+| regno | name        | coursename | marks |
++-------+-------------+------------+-------+
+|   206 | hemanth     | DBMS       |    96 |
+|   205 | rajashekhar | DBMS       |    92 |
+|   215 | shreeya     | DBMS       |    93 |
+|   296 | shaheed     | DBMS       |    89 |
++-------+-------------+------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select avg(marks) from marks;
++------------+
+| avg(marks) |
++------------+
+|    92.5000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from marks;
++------------+
+| max(marks) |
++------------+
+|         96 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks), min(marks) from marks;
++------------+------------+
+| max(marks) | min(marks) |
++------------+------------+
+|         96 |         89 |
++------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks), max(marks), min(marks) from marks;
++------------+------------+------------+
+| avg(marks) | max(marks) | min(marks) |
++------------+------------+------------+
+|    92.5000 |         96 |         89 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from marks;
++------------+
+| sum(marks) |
++------------+
+|        370 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select regno, max(marks) from marks;
++-------+------------+
+| regno | max(marks) |
++-------+------------+
+|   206 |         96 |
++-------+------------+
+1 row in set (0.00 sec)

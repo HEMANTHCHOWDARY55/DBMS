@@ -1,0 +1,128 @@
+EXPERIMENT 7:
+
+mysql> use marks;
+Database changed
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> select * from marks;
++-------+-------------+------------+-------+
+| regno | name        | coursename | marks |
++-------+-------------+------------+-------+
+|   206 | hemanth     | DBMS       |    96 |
+|   205 | rajashekhar | DBMS       |    92 |
+|   215 | shreeya     | DBMS       |    93 |
+|   296 | shaheed     | DBMS       |    89 |
++-------+-------------+------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks where marks>(select avg(marks) from marks);
++-------+---------+------------+-------+
+| regno | name    | coursename | marks |
++-------+---------+------------+-------+
+|   206 | hemanth | DBMS       |    96 |
+|   215 | shreeya | DBMS       |    93 |
++-------+---------+------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE marks
+    -> ADD COLUMN assessment int(3);
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc marks;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| regno      | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| coursename | varchar(30) | YES  |     | NULL    |       |
+| marks      | int(3)      | YES  |     | NULL    |       |
+| assessment | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> ALTER TABLE marks
+    -> update marks set;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'update marks set' at line 2
+mysql> select * from marks;
++-------+-------------+------------+-------+------------+
+| regno | name        | coursename | marks | assessment |
++-------+-------------+------------+-------+------------+
+|   206 | hemanth     | DBMS       |    96 |       NULL |
+|   205 | rajashekhar | DBMS       |    92 |       NULL |
+|   215 | shreeya     | DBMS       |    93 |       NULL |
+|   296 | shaheed     | DBMS       |    89 |       NULL |
++-------+-------------+------------+-------+------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE marks
+    -> UPDATE marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPDATE marks' at line 2
+mysql> ALTER TABLE marks;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE marks
+    -> UPDATE marks
+    -> set assessment=86 WHERE name='shreeya';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UPDATE marks
+set assessment=86 WHERE name='shreeya'' at line 2
+mysql> UPDATE marks set assessment=86 WHERE name='shreeya';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE marks set assessment=87.5 WHERE name='hemanth';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE marks set assessment=91 WHERE name='shaheed';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+UPDATE marks set assessment=87.5 WHERE name='hemanth';
+Query OK, 0 rows affected (0.02 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> UPDATE marks set assessment=84 WHERE name='rajashekhar';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++-------+-------------+------------+-------+------------+
+| regno | name        | coursename | marks | assessment |
++-------+-------------+------------+-------+------------+
+|   206 | hemanth     | DBMS       |    96 |         88 |
+|   205 | rajashekhar | DBMS       |    92 |         84 |
+|   215 | shreeya     | DBMS       |    93 |         86 |
+|   296 | shaheed     | DBMS       |    89 |         91 |
++-------+-------------+------------+-------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks where assessment>87;
++-------+---------+------------+-------+------------+
+| regno | name    | coursename | marks | assessment |
++-------+---------+------------+-------+------------+
+|   206 | hemanth | DBMS       |    96 |         88 |
+|   296 | shaheed | DBMS       |    89 |         91 |
++-------+---------+------------+-------+------------+
+2 rows in set (0.00 sec)
